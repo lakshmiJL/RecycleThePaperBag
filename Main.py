@@ -29,7 +29,8 @@ def draw():
     if game_over:
         display_message("GAMEOVER, TRY AGAIN")
     elif game_complete:
-        display_message("YOU WON")
+        #argument missing for sub heading added
+        display_message("YOU WON","Well done")
     else: 
         for i in items:
             i.draw()
@@ -77,7 +78,8 @@ def animate_items(items_to_animate):
     global animations
     for i in items_to_animate:
         duration = START_SPEED - current_level
-        i.anchor("center", "bottom")
+        #anchor is not a function
+        i.anchor=("center", "bottom")
         ani = animate(i, duration = duration, on_finished = handle_game_over, y = HEIGHT)
         animations.append(ani)
 
@@ -90,7 +92,8 @@ def on_mouse_down(pos):
 
     for i in items:
         if i.collidepoint(pos):
-            if "paper" in i.image():
+            #image is not a function () removed
+            if "paper" in i.image:
                 handle_game_complete()
             else:
                 handle_game_over()
@@ -107,7 +110,8 @@ def handle_game_complete():
         animations = []
 def stop_animation(animations_to_stop):
     for i in animations_to_stop:
-        if i.running():
+        #running is just a property () removed
+        if i.running:
             i.stop()
 
 def display_message(heading_text, subheading_text):
